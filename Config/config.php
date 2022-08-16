@@ -10,6 +10,18 @@ return [
             'order' => 12,
             'submenu' => [
                 [
+                    'text' => 'Add Category',
+                    'route' => 'admin.categories.create',
+                    'can' => 'category-create',
+                    'order' => 130
+                ],
+                [
+                    'text' => 'Category List',
+                    'route' => 'admin.categories.index',
+                    'can' => 'category-read',
+                    'order' => 130
+                ],
+                [
                     'text' => 'Add Medicine',
                     'route' => 'admin.medicines.create',
                     'can' => 'medicines-create',
