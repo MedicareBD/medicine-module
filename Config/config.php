@@ -13,13 +13,13 @@ return [
                     'text' => 'Add Category',
                     'route' => 'admin.categories.create',
                     'can' => 'category-create',
-                    'order' => 130
+                    'order' => 131
                 ],
                 [
                     'text' => 'Category List',
                     'route' => 'admin.categories.index',
                     'can' => 'category-read',
-                    'order' => 130
+                    'order' => 132
                 ],
                 [
                     'text' => 'Add Medicine',

@@ -1,15 +1,15 @@
 @extends('layouts.admin.app')
 
-@section('title', __('Edit category'))
+@section('title', __('Create category'))
 
 @section('content')
     <div class="row">
         <div class="col-md-12 col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>@lang('Edit Category')</h4>
+                    <h4>@lang('Add Category')</h4>
                     <div class="card-header-action">
-                        <a href="{{ route('admin.categories.index') }}" class="btn btn-primary">
+                        <a href="{{ route('admin.manufacturer.index') }}" class="btn btn-primary">
                             <i class="fas fa-align-justify"></i> @lang('Category List')
                         </a>
                     </div>
