@@ -7,10 +7,10 @@
         <div class="col-md-12 col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Edit Category') }}</h4>
+                    <h4>{{ __('Edit Unit') }}</h4>
                     <div class="card-header-action">
                         <a href="{{ route('admin.categories.index') }}" class="btn btn-primary">
-                            <i class="fas fa-align-justify"></i> {{ __('Category List') }}
+                            <i class="fas fa-align-justify"></i> {{ __('Unit List') }}
                         </a>
                     </div>
                 </div>

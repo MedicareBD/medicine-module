@@ -1,16 +1,16 @@
 @extends('core::layouts.admin.app')
 
-@section('title', __('Edit category'))
+@section('title', __('Create unit'))
 
 @section('content')
     <div class="row">
         <div class="col-md-12 col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>{{ __('Edit Category') }}</h4>
+                    <h4>{{ __('Add Unit') }}</h4>
                     <div class="card-header-action">
-                        <a href="{{ route('admin.categories.index') }}" class="btn btn-primary">
-                            <i class="fas fa-align-justify"></i> {{ __('Category List') }}
+                        <a href="{{ route('admin.units.index') }}" class="btn btn-primary">
+                            <i class="fas fa-align-justify"></i> {{ __('Unit List') }}
                         </a>
                     </div>
                 </div>
@@ -18,9 +18,9 @@
                     <form action="{{ route('admin.categories.store') }}" method="post" class="instant_reload_form">
                         @csrf
                         <div class="form-group row">
-                            <label for="category_name" class="col-sm-3 col-form-label">{{ __('Category Name') }} <i class="text-danger">*</i></label>
+                            <label for="category_name" class="col-sm-3 col-form-label">{{ __('Unit Name') }} <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
-                                <input name="category_name" class="form-control" type="text" placeholder="{{ __('Category Name') }}" id="category_name">
+                                <input name="category_name" class="form-control" type="text" placeholder="{{ __('Unit Name') }}" id="name">
                             </div>
                         </div>
 

@@ -22,6 +22,18 @@ return [
                     'order' => 132
                 ],
                 [
+                    'text' => 'Add Unit',
+                    'route' => 'admin.units.create',
+                    'can' => 'units-create',
+                    'order' => 131
+                ],
+                [
+                    'text' => 'Unit List',
+                    'route' => 'admin.units.index',
+                    'can' => 'units-read',
+                    'order' => 132
+                ],
+                [
                     'text' => 'Add Medicine',
                     'route' => 'admin.medicines.create',
                     'can' => 'medicines-create',
