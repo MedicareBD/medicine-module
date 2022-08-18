@@ -2,78 +2,67 @@
 
 namespace Modules\Medicine\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Medicine\DataTables\MedicineDataTable;
+use Modules\Medicine\Entities\Medicine;
 
 class MedicineController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
+    public function index(MedicineDataTable $dataTable)
     {
-        return view('medicine::index');
+        return $dataTable->render('medicine::medicines.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
     public function create()
     {
         return view('medicine::create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            //
+        ]);
+
+        return response()->json([
+            'message' => __("Medicine Created Successfully"),
+            'redirect' => route('admin.medicine.index')
+        ]);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    public function show(Medicine $medicine)
     {
-        return view('medicine::show');
+        return view('medicine::show', compact('medicine'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
+    public function edit(Medicine $medicine)
     {
-        return view('medicine::edit');
+        return view('medicine::edit', compact('medicine'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Medicine $medicine)
     {
-        //
+        $request->validate([
+            //
+        ]);
+
+        $medicine->update([
+            //
+        ]);
+
+        return response()->json([
+            'message' => __("Medicine Updated Successfully"),
+            'redirect' => route('admin.medicine.index')
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+    public function destroy(Medicine $medicine)
     {
-        //
+        $medicine->delete();
+
+        return response()->json([
+            'message' => __("Medicine Deleted Successfully"),
+        ]);
     }
 }

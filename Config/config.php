@@ -34,6 +34,30 @@ return [
                     'order' => 132
                 ],
                 [
+                    'text' => 'Add Type',
+                    'route' => 'admin.types.create',
+                    'can' => 'types-create',
+                    'order' => 131
+                ],
+                [
+                    'text' => 'Type List',
+                    'route' => 'admin.types.index',
+                    'can' => 'types-read',
+                    'order' => 132
+                ],
+                [
+                    'text' => 'Add Leaf',
+                    'route' => 'admin.leafs.create',
+                    'can' => 'leafs-create',
+                    'order' => 131
+                ],
+                [
+                    'text' => 'Leaf List',
+                    'route' => 'admin.leafs.index',
+                    'can' => 'leafs-read',
+                    'order' => 132
+                ],
+                [
                     'text' => 'Add Medicine',
                     'route' => 'admin.medicines.create',
                     'can' => 'medicines-create',

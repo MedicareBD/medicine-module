@@ -1,32 +1,32 @@
 @extends('core::layouts.admin.app')
 
-@section('title', __('Edit Unit'))
+@section('title', __('Create Type'))
 
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h4>{{ __('Edit Unit') }}</h4>
+                    <h4>{{ __('Add Type') }}</h4>
                     <div class="card-header-action">
-                        <a href="{{ route('admin.units.index') }}" class="btn btn-primary">
-                            <i class="fas fa-align-justify"></i> {{ __('Unit List') }}
+                        <a href="{{ route('admin.types.index') }}" class="btn btn-primary">
+                            <i class="fas fa-align-justify"></i> {{ __('Type List') }}
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.units.update', $unit->id) }}" method="post" class="instant_reload_form">
+                    <form action="{{ route('admin.types.store') }}" method="post" class="instant_reload_form">
                         @csrf
                         <div class="form-group">
-                            <label for="name" class="required">{{ __('Unit Name') }}</label>
-                            <input type="text" name="name" id="name" value="{{ $unit->name }}" class="form-control" placeholder="{{ __('Enter unit name') }}" required>
+                            <label for="name" class="required">{{ __('Type Name') }}</label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('Enter type name') }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="status" class="required">{{ __('Status') }}</label>
                             <select name="status" id="status" data-control="select2" required>
-                                <option value="1" @selected($unit->status)>{{ __("Active") }}</option>
-                                <option value="0" @selected(!$unit->status)>{{ __("Inactive") }}</option>
+                                <option value="1">{{ __("Active") }}</option>
+                                <option value="0">{{ __("Inactive") }}</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary waves-effect waves-light float-right submit-button">
