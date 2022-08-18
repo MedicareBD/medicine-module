@@ -2,78 +2,73 @@
 
 namespace Modules\Medicine\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\Rule;
+use Modules\Medicine\DataTables\CategoryDataTable;
+use Modules\Medicine\Entities\Category;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
+    public function __construct()
     {
-        return view('medicine::categories.index');
+        $this->middleware('permission:categories-create')->only('create', 'store');
+        $this->middleware('permission:categories-read')->only('index');
+        $this->middleware('permission:categories-update')->only('edit', 'update');
+        $this->middleware('permission:categories-delete')->only('edit', 'destroy');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
+    public function index(CategoryDataTable $dataTable)
+    {
+        return $dataTable->render('medicine::categories.index');
+    }
+
     public function create()
     {
         return view('medicine::categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'unique:categories,name'],
+            'status' => ['boolean']
+        ]);
+
+        Category::create($validated);
+
+        return response()->json([
+            'message' => __("Category Created Successfully"),
+            'redirect' => route('admin.categories.index')
+        ]);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    public function edit(Category $category)
     {
-        return view('medicine::categories.show');
+        return view('medicine::categories.edit', compact('category'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
+    public function update(Request $request, Category $category)
     {
-        return view('medicine::categories.edit');
+        $validated = $request->validate([
+            'name' => ['required', 'string', Rule::unique('categories')->ignore($category->id), 'max:255'],
+            'status' => ['boolean']
+        ]);
+
+        $category->update($validated);
+
+        return response()->json([
+            'message' => __("Category Updated Successfully"),
+            'redirect' => route('admin.categories.index')
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function destroy(Category $category)
     {
-        //
-    }
+        $category->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json([
+            'message' => __("Category Deleted Successfully"),
+        ]);
     }
 }

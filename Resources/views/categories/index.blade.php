@@ -1,6 +1,6 @@
 @extends('core::layouts.admin.app')
 
-@section('title', __('Manage category'))
+@section('title', __('Manage Category'))
 
 @section('content')
     <div class="row">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        {{-- {{ $dataTable->table() }} --}}
+                         {{ $dataTable->table() }}
                     </div>
                 </div>
             </div>
@@ -23,5 +23,5 @@
 @endsection
 
 @push('pageScripts')
-    {{-- {{ $dataTable->scripts() }} --}}
+     {{ $dataTable->scripts() }}
 @endpush

@@ -6,6 +6,6 @@ use Modules\Medicine\Http\Controllers\MedicineController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin']], function (){
     Route::resource('medicines', MedicineController::class);
-    Route::resource('categories', CategoryController::class);
+    Route::resource('categories', CategoryController::class)->except('show');
     Route::resource('units', UnitController::class);
 });

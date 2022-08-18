@@ -2,78 +2,73 @@
 
 namespace Modules\Medicine\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\Rule;
+use Modules\Medicine\DataTables\UnitDataTable;
+use Modules\Medicine\Entities\Unit;
 
 class UnitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
+    public function __construct()
     {
-        return view('medicine::units.index');
+        $this->middleware('permission:units-create')->only('create', 'store');
+        $this->middleware('permission:units-read')->only('index');
+        $this->middleware('permission:units-update')->only('edit', 'update');
+        $this->middleware('permission:units-delete')->only('edit', 'destroy');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
+    public function index(UnitDataTable $dataTable)
+    {
+        return $dataTable->render('medicine::units.index');
+    }
+
     public function create()
     {
         return view('medicine::units.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'unique:units,name'],
+            'status' => ['boolean']
+        ]);
+
+        Unit::create($validated);
+
+        return response()->json([
+            'message' => __("Unit Created Successfully"),
+            'redirect' => route('admin.units.index')
+        ]);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    public function edit(Unit $unit)
     {
-        return view('medicine::units.show');
+        return view('medicine::units.edit', compact('unit'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
+    public function update(Request $request, Unit $unit)
     {
-        return view('medicine::units.edit');
+        $validated = $request->validate([
+            'name' => ['required', 'string', Rule::unique('units')->ignore($unit->id), 'max:255'],
+            'status' => ['boolean']
+        ]);
+
+        $unit->update($validated);
+
+        return response()->json([
+            'message' => __("Unit Updated Successfully"),
+            'redirect' => route('admin.units.index')
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function destroy(Unit $unit)
     {
-        //
-    }
+        $unit->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json([
+            'message' => __("Unit Deleted Successfully"),
+        ]);
     }
 }

@@ -12,13 +12,13 @@ return [
                 [
                     'text' => 'Add Category',
                     'route' => 'admin.categories.create',
-                    'can' => 'category-create',
+                    'can' => 'categories-create',
                     'order' => 131
                 ],
                 [
                     'text' => 'Category List',
                     'route' => 'admin.categories.index',
-                    'can' => 'category-read',
+                    'can' => 'categories-read',
                     'order' => 132
                 ],
                 [

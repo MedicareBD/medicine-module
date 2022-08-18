@@ -1,6 +1,6 @@
 @extends('core::layouts.admin.app')
 
-@section('title', __('Manage unit'))
+@section('title', __('Manage Unit'))
 
 @section('content')
     <div class="row">
@@ -9,12 +9,12 @@
                 <div class="card-header">
                     <h4>{{ __('Unit List') }}</h4>
                     <div class="card-header-action">
-                        <a href="{{ route('admin.categories.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{ __('Add Category') }}</a>
+                        <a href="{{ route('admin.units.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{ __('Add Unit') }}</a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        {{-- {{ $dataTable->table() }} --}}
+                         {{ $dataTable->table() }}
                     </div>
                 </div>
             </div>
@@ -23,5 +23,5 @@
 @endsection
 
 @push('pageScripts')
-    {{-- {{ $dataTable->scripts() }} --}}
+     {{ $dataTable->scripts() }}
 @endpush
