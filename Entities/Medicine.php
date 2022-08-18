@@ -6,12 +6,13 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Core\Helpers\HasAmount;
 
 class Medicine extends Model
 {
-    use HasFactory;
+    use HasFactory, HasAmount;
 
-    protected $fillable = [];
+    protected $guarded = ['id'];
 
     public function addedBy(): BelongsTo
     {

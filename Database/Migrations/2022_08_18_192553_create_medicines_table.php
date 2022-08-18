@@ -24,6 +24,8 @@ return new class extends Migration
             $table->integer('price')->nullable();
             $table->integer('box_price')->nullable();
             $table->integer('manufacturer_price')->nullable();
+            $table->double('vat', 2)->nullable()->comment('in percentage');
+            $table->double('igta', 2)->nullable()->comment('in percentage');
             $table->string('image')->nullable();
             $table->boolean('status');
 

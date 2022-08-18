@@ -1,4 +1,6 @@
-@extends('core::layouts.admin.app')
+@extends('core::layouts.admin.app',[
+    'hasModal' => true
+])
 
 @section('title', __('Medicine List'))
 
@@ -16,7 +18,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-{{--                        {{ $dataTable->table() }}--}}
+                        {{ $dataTable->table() }}
                     </div>
                 </div>
             </div>
@@ -25,5 +27,5 @@
 @endsection
 
 @push('pageScripts')
-{{--    {{ $dataTable->scripts() }}--}}
+    {{ $dataTable->scripts() }}
 @endpush
