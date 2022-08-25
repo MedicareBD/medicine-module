@@ -32,14 +32,14 @@ class TypeController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'unique:types,name'],
-            'status' => ['boolean']
+            'status' => ['boolean'],
         ]);
 
         Type::create($validated);
 
         return response()->json([
-            'message' => __("Type Created Successfully"),
-            'redirect' => route('admin.types.index')
+            'message' => __('Type Created Successfully'),
+            'redirect' => route('admin.types.index'),
         ]);
     }
 
@@ -52,14 +52,14 @@ class TypeController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', Rule::unique('types')->ignore($type->id), 'max:255'],
-            'status' => ['boolean']
+            'status' => ['boolean'],
         ]);
 
         $type->update($validated);
 
         return response()->json([
-            'message' => __("Type Updated Successfully"),
-            'redirect' => route('admin.types.index')
+            'message' => __('Type Updated Successfully'),
+            'redirect' => route('admin.types.index'),
         ]);
     }
 
@@ -68,7 +68,7 @@ class TypeController extends Controller
         $type->delete();
 
         return response()->json([
-            'message' => __("Type Deleted Successfully"),
+            'message' => __('Type Deleted Successfully'),
         ]);
     }
 }

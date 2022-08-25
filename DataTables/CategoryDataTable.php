@@ -2,14 +2,11 @@
 
 namespace Modules\Medicine\DataTables;
 
-use Modules\Medicine\Entities\Category;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Modules\Medicine\Entities\Category;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class CategoryDataTable extends DataTable
@@ -18,8 +15,8 @@ class CategoryDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->editColumn('status', fn($model) => $model->status ? '<span class="badge badge-success"><i class="fas fa-check-circle"></i> '.__("Active").'</span>' : '<span class="badge badge-danger"><i class="fas fa-times-circle"></i> '.__("Inactive").'</span>')
-            ->editColumn('created_at', fn($model) => format_date($model->created_at))
+            ->editColumn('status', fn ($model) => $model->status ? '<span class="badge badge-success"><i class="fas fa-check-circle"></i> '.__('Active').'</span>' : '<span class="badge badge-danger"><i class="fas fa-times-circle"></i> '.__('Inactive').'</span>')
+            ->editColumn('created_at', fn ($model) => format_date($model->created_at))
             ->addColumn('action', 'medicine::categories.action')
             ->setRowId('id')
             ->rawColumns(['action', 'status']);
@@ -56,9 +53,9 @@ class CategoryDataTable extends DataTable
                 ->exportable(false)
                 ->orderable(false)
                 ->title('#'),
-            Column::make('name')->title(__("Name")),
-            Column::make('status')->title(__("Status"))->addClass('text-center'),
-            Column::make('created_at')->title(__("Created At")),
+            Column::make('name')->title(__('Name')),
+            Column::make('status')->title(__('Status'))->addClass('text-center'),
+            Column::make('created_at')->title(__('Created At')),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -71,6 +68,6 @@ class CategoryDataTable extends DataTable
 
     protected function filename(): string
     {
-        return 'Categorys_' . date('YmdHis');
+        return 'Categorys_'.date('YmdHis');
     }
 }

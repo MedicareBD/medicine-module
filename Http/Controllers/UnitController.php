@@ -32,14 +32,14 @@ class UnitController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'unique:units,name'],
-            'status' => ['boolean']
+            'status' => ['boolean'],
         ]);
 
         Unit::create($validated);
 
         return response()->json([
-            'message' => __("Unit Created Successfully"),
-            'redirect' => route('admin.units.index')
+            'message' => __('Unit Created Successfully'),
+            'redirect' => route('admin.units.index'),
         ]);
     }
 
@@ -52,14 +52,14 @@ class UnitController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', Rule::unique('units')->ignore($unit->id), 'max:255'],
-            'status' => ['boolean']
+            'status' => ['boolean'],
         ]);
 
         $unit->update($validated);
 
         return response()->json([
-            'message' => __("Unit Updated Successfully"),
-            'redirect' => route('admin.units.index')
+            'message' => __('Unit Updated Successfully'),
+            'redirect' => route('admin.units.index'),
         ]);
     }
 
@@ -68,7 +68,7 @@ class UnitController extends Controller
         $unit->delete();
 
         return response()->json([
-            'message' => __("Unit Deleted Successfully"),
+            'message' => __('Unit Deleted Successfully'),
         ]);
     }
 }

@@ -32,14 +32,14 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'unique:categories,name'],
-            'status' => ['boolean']
+            'status' => ['boolean'],
         ]);
 
         Category::create($validated);
 
         return response()->json([
-            'message' => __("Category Created Successfully"),
-            'redirect' => route('admin.categories.index')
+            'message' => __('Category Created Successfully'),
+            'redirect' => route('admin.categories.index'),
         ]);
     }
 
@@ -52,14 +52,14 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', Rule::unique('categories')->ignore($category->id), 'max:255'],
-            'status' => ['boolean']
+            'status' => ['boolean'],
         ]);
 
         $category->update($validated);
 
         return response()->json([
-            'message' => __("Category Updated Successfully"),
-            'redirect' => route('admin.categories.index')
+            'message' => __('Category Updated Successfully'),
+            'redirect' => route('admin.categories.index'),
         ]);
     }
 
@@ -68,7 +68,7 @@ class CategoryController extends Controller
         $category->delete();
 
         return response()->json([
-            'message' => __("Category Deleted Successfully"),
+            'message' => __('Category Deleted Successfully'),
         ]);
     }
 }

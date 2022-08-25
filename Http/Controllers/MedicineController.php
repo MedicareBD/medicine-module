@@ -33,30 +33,30 @@ class MedicineController extends Controller
         }
 
         Medicine::create([
-            "bar_code" => $validated['bar_code'],
-            "name" => $validated['name'],
-            "generic_name" => $validated['generic_name'],
-            "details" => $validated['details'],
-            "strength" => $validated['strength'],
-            "shelf" => $validated['shelf'],
-            "price" => $validated['price'],
-            "box_price" => 0,
-            "manufacturer_price" => $validated['manufacturer_price'],
-            "image" => $image ?? 'images/pill.png',
-            "vat" => $validated['vat'],
-            "igta" => $validated['igta'],
-            "status" => $validated['status'],
-            "category_id" => $validated['category'],
-            "unit_id" => $validated['unit'],
-            "type_id" => $validated['type'],
-            "leaf_id" => $validated['leaf'],
-            "manufacturer_id" => $validated['manufacturer'],
-            "added_by" => Auth::id(),
+            'bar_code' => $validated['bar_code'],
+            'name' => $validated['name'],
+            'generic_name' => $validated['generic_name'],
+            'details' => $validated['details'],
+            'strength' => $validated['strength'],
+            'shelf' => $validated['shelf'],
+            'price' => $validated['price'],
+            'box_price' => 0,
+            'manufacturer_price' => $validated['manufacturer_price'],
+            'image' => $image ?? 'images/pill.png',
+            'vat' => $validated['vat'],
+            'igta' => $validated['igta'],
+            'status' => $validated['status'],
+            'category_id' => $validated['category'],
+            'unit_id' => $validated['unit'],
+            'type_id' => $validated['type'],
+            'leaf_id' => $validated['leaf'],
+            'manufacturer_id' => $validated['manufacturer'],
+            'added_by' => Auth::id(),
         ]);
 
         return response()->json([
-            'message' => __("Medicine Created Successfully"),
-            'redirect' => route('admin.medicines.index')
+            'message' => __('Medicine Created Successfully'),
+            'redirect' => route('admin.medicines.index'),
         ]);
     }
 
@@ -77,23 +77,25 @@ class MedicineController extends Controller
 
     public function showQrCoders(Medicine $medicine)
     {
-        if (!$medicine->bar_code){
+        if (! $medicine->bar_code) {
             return response()->json([
-                'message' => __("Bar/QR Code Not Found")
+                'message' => __('Bar/QR Code Not Found'),
             ], 404);
         }
+
         return view('medicine::medicines.qr-code', compact('medicine'))->render();
     }
 
     public function showBarCoders(Medicine $medicine)
     {
-        if (!$medicine->bar_code){
+        if (! $medicine->bar_code) {
             return response()->json([
-                'message' => __("Bar/QR Code Not Found")
+                'message' => __('Bar/QR Code Not Found'),
             ], 404);
         }
 
         $barcode = barcode($medicine->id, $medicine->bar_code);
+
         return view('medicine::medicines.bar-code', compact('medicine', 'barcode'))->render();
     }
 
@@ -113,8 +115,8 @@ class MedicineController extends Controller
         ]);
 
         return response()->json([
-            'message' => __("Medicine Updated Successfully"),
-            'redirect' => route('admin.medicine.index')
+            'message' => __('Medicine Updated Successfully'),
+            'redirect' => route('admin.medicine.index'),
         ]);
     }
 
@@ -123,7 +125,7 @@ class MedicineController extends Controller
         $medicine->delete();
 
         return response()->json([
-            'message' => __("Medicine Deleted Successfully"),
+            'message' => __('Medicine Deleted Successfully'),
         ]);
     }
 
@@ -131,11 +133,11 @@ class MedicineController extends Controller
     {
         $search = $request->get('search');
 
-        if (!is_null($search)) {
+        if (! is_null($search)) {
             $users = User::role('Manufacturer')
                 ->orderby('name')
                 ->select(['id', 'name as text', 'avatar'])
-                ->where('name', 'like', '%' . $search . '%')
+                ->where('name', 'like', '%'.$search.'%')
                 ->paginate(20);
         } else {
             return response()->json();

@@ -32,14 +32,14 @@ class LeafController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'unique:leafs,name'],
-            'status' => ['boolean']
+            'status' => ['boolean'],
         ]);
 
         Leaf::create($validated);
 
         return response()->json([
-            'message' => __("Leaf Created Successfully"),
-            'redirect' => route('admin.leafs.index')
+            'message' => __('Leaf Created Successfully'),
+            'redirect' => route('admin.leafs.index'),
         ]);
     }
 
@@ -52,14 +52,14 @@ class LeafController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', Rule::unique('leafs')->ignore($leaf->id), 'max:255'],
-            'status' => ['boolean']
+            'status' => ['boolean'],
         ]);
 
         $leaf->update($validated);
 
         return response()->json([
-            'message' => __("Leaf Updated Successfully"),
-            'redirect' => route('admin.leafs.index')
+            'message' => __('Leaf Updated Successfully'),
+            'redirect' => route('admin.leafs.index'),
         ]);
     }
 
@@ -68,7 +68,7 @@ class LeafController extends Controller
         $leaf->delete();
 
         return response()->json([
-            'message' => __("Leaf Deleted Successfully"),
+            'message' => __('Leaf Deleted Successfully'),
         ]);
     }
 }
