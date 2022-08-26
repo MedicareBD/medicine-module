@@ -43,9 +43,4 @@ class Medicine extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    protected static function newFactory()
-    {
-        return \Modules\Medicine\Database\factories\MedicineFactory::new();
-    }
 }
